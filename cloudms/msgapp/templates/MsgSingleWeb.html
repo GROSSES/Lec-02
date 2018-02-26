@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CloudMsg Homepage</title>
+</head>
+<body>
+    <h1>Msg Ribbon</h1>
+    <form action="/msggate/" method="post">
+    {%  csrf_token %}
+    发送方 <input type="text" name="userA"/><br>
+    接收方 <input type="text" name="userB"/> <br>
+    消息文 <input type="text" name="msg"/> <br>
+    <input type="submit" value="留言提交"/>
+</form>
+
+<h1>获取留言功能区</h1>
+<form action="/msggate/" method="get">
+接收方 <input type="text" name="userC"/> <br>
+<input type="submit" value="留言获取">
+</form>
+<table border="1">
+    <thead>
+        <th>Time</th>
+        <th>Source</th>
+        <th>Message</th>
+    </thead>
+    <br>
+    <tbody>
+        {% for line in data %}
+        <tr>
+            <td>{{line.time}}</td>
+            <td align="center">{{line.userA}}</td>
+            <td>{{line.msg}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
